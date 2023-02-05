@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
 
 import static dev.chaos.ezcoords.client.EZCoordsClient.copyCoordsToClipboard;
@@ -16,7 +17,7 @@ public class KeyInputHandler {
     public static void registerKeyInput() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (EZCoordsCopyKey.wasPressed() && client.player != null) {
-                copyCoordsToClipboard(client.player.getBlockPos().toCenterPos());
+                copyCoordsToClipboard(new Vec3d(client.player.getX(), client.player.getY(), client.player.getZ()));
             }
         });
     }
