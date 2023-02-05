@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "ezcoords",
+  "version": "${version}",
+  "name": "EZCoords",
+  "description": "Easily copy your coordinates to the clipboard.",
+  "authors": [
+    "chaos"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/EZCoords",
+    "sources": "https://github.com/qtchaos/EZCoords",
+    "issues": "https://github.com/qtchaos/EZCoords/issues"
+  },
+  "license": "GPL-3.0 license",
+  "icon": "assets/ezcoords/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.chaos.ezcoords.client.EZCoordsClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.14",
+    "fabric": "*",
+    "minecraft": "1.19.3"
+  }
+}
