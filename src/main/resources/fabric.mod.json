@@ -24,5 +24,12 @@
     "fabricloader": ">=0.14.13",
     "fabric": "*",
     "minecraft": "1.19.2"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/AyaZ5EkpMd"
+      }
+    }
   }
 }
