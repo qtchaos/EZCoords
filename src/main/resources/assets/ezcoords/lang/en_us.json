@@ -1,4 +1,5 @@
 {
   "key.ezcoords.main": "EZCoords",
-  "key.ezcoords.keyCopy": "Copy Coordinates"
+  "key.ezcoords.keyCopy": "Copy Coordinates",
+  "key.ezcoords.keyCopyBlock": "Copy Block Coordinates"
 }

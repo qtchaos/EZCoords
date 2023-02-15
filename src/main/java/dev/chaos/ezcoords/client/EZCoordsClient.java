@@ -2,6 +2,7 @@ package dev.chaos.ezcoords.client;
 
 import dev.chaos.ezcoords.client.event.ClientCommandHandler;
 import dev.chaos.ezcoords.client.event.KeyInputHandler;
+import static dev.chaos.ezcoords.client.Config.getValue;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -12,9 +13,6 @@ import net.minecraft.util.math.Vec3d;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 
 @Environment(EnvType.CLIENT)
 public class EZCoordsClient implements ClientModInitializer {
@@ -24,9 +22,15 @@ public class EZCoordsClient implements ClientModInitializer {
         LOGGER = LoggerFactory.getLogger("EZCoords");
         ClientCommandHandler.register();
         KeyInputHandler.register();
+        Config.intialize();
     }
     public static void copyCoordsToClipboard(Vec3d pos) {
-        String coordsString = String.format("X: %.2f, Y: %.2f, Z: %.2f", pos.x, pos.y, pos.z);
+        String coordsString;
+        if (getValue("command_block_mode").equals("true")) {
+            coordsString = String.format("%.2f %.2f %.2f", pos.x, pos.y, pos.z);
+        } else {
+            coordsString = String.format("X: %.2f, Y: %.2f, Z: %.2f", pos.x, pos.y, pos.z);
+        }
 
         Keyboard keyboard = MinecraftClient.getInstance().keyboard;
         keyboard.setClipboard(coordsString);
