@@ -5,7 +5,9 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.BlockPos;
 import org.lwjgl.glfw.GLFW;
 
 import static dev.chaos.ezcoords.client.EZCoordsClient.copyCoordsToClipboard;
@@ -26,7 +28,8 @@ public class KeyInputHandler {
                 if (EZCoordsCopyBlockKey.wasPressed()) {
                     Entity entity = client.getCameraEntity();
                     HitResult blockHit = entity.raycast(20.0, 0.0F, false);
-                    copyCoordsToClipboard(new double[]{blockHit.getPos().x, blockHit.getPos().y, blockHit.getPos().z});
+                    BlockPos blockPos = ((BlockHitResult)blockHit).getBlockPos();
+                    copyCoordsToClipboard(new double[]{blockPos.getX(), blockPos.getY(), blockPos.getZ()});
                 }
             }
         });
