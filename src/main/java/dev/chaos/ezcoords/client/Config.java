@@ -18,8 +18,6 @@ public class Config {
         if (!FabricLoader.getInstance().getConfigDir().resolve("EZCoords.properties").toFile().exists()) {
             writeConfig();
         }
-
-        setValue("command_block_mode", String.valueOf(true));
     }
     public static void setValue(String Key, String Value) {
         for (int i = 0; i < Array.getLength(AllOptions); i++) {
