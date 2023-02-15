@@ -9,7 +9,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.Vec3d;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,12 +23,12 @@ public class EZCoordsClient implements ClientModInitializer {
         KeyInputHandler.register();
         Config.intialize();
     }
-    public static void copyCoordsToClipboard(Vec3d pos) {
+    public static void copyCoordsToClipboard(double[] pos) {
         String coordsString;
         if (getValue("command_block_mode").equals("true")) {
-            coordsString = String.format("%.2f %.2f %.2f", pos.x, pos.y, pos.z);
+            coordsString = String.format("%d %d %d", Math.round(pos[0]), Math.round(pos[1]), Math.round(pos[2]));
         } else {
-            coordsString = String.format("X: %.2f, Y: %.2f, Z: %.2f", pos.x, pos.y, pos.z);
+            coordsString = String.format("X: %d, Y: %d, Z: %d", Math.round(pos[0]), Math.round(pos[1]), Math.round(pos[2]));
         }
 
         Keyboard keyboard = MinecraftClient.getInstance().keyboard;
