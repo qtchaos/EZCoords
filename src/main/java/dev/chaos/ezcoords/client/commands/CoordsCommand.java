@@ -3,9 +3,9 @@ package dev.chaos.ezcoords.client.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.Vec3d;
 
 import static dev.chaos.ezcoords.client.EZCoordsClient.copyCoordsToClipboard;
 
@@ -13,8 +13,9 @@ public class CoordsCommand {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
         dispatcher.register(ClientCommandManager.literal("coords")
             .executes(context -> {
-                Vec3d coords = context.getSource().getPlayer().getPos();
-                copyCoordsToClipboard(coords);
+                MinecraftClient client = context.getSource().getClient();
+                assert client.player != null;
+                copyCoordsToClipboard(new double[]{client.player.getX(), client.player.getY(), client.player.getZ()});
                 return 1;
             })
         );
@@ -24,7 +25,7 @@ public class CoordsCommand {
                 Entity entity = context.getSource().getClient().getCameraEntity();
                 assert entity != null;
                 HitResult blockHit = entity.raycast(20.0, 0.0F, false);
-                copyCoordsToClipboard(blockHit.getPos());
+                copyCoordsToClipboard(new double[]{blockHit.getPos().x, blockHit.getPos().y, blockHit.getPos().z});
                 return 1;
             }))
         );
